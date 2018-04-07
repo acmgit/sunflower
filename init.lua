@@ -1,6 +1,3 @@
-local sunflower = {}
-
-
 --<<== Items >>==--
 
 -- sunflower Seeds
@@ -9,6 +6,12 @@ minetest.register_craftitem("sunflower:sunflower_seeds", {
     groups = {seed = 1, food = 1},
     inventory_image = "sunflower_seeds.png",
     on_use = minetest.item_eat(1),
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "sunflower:sunflower_seeds",
+	burntime = 2
 })
 
 minetest.register_craft({
@@ -36,11 +39,23 @@ minetest.register_craft({
 })
 
 -- sunflower Seeds Oil
-minetest.register_craftitem("sunflower:sunflower_seeds_oil", {
-    description = "Sunflower Seeds Oil",
-    groups = {food = 1},
-    inventory_image = "sunflower_seeds_oil.png",
-    on_use = minetest.item_eat(2),
+
+minetest.register_node("sunflower:sunflower_seeds_oil", {
+	description = "Bottle of Sunflower Seeds Oil",
+	drawtype = "plantlike",
+	tiles = {"sunflower_seeds_oil.png"},
+	inventory_image = "sunflower_seeds_oil.png",
+	wield_image = "sunflower_seeds_oil.png",
+	paramtype = "light",
+	is_ground_content = false,
+	walkable = false,
+	on_use = minetest.item_eat(2, "vessels:glass_bottle"),
+	selection_box = {
+		type = "fixed",
+		fixed = {-0.25, -0.5, -0.25, 0.25, 0.3, 0.25}
+	},
+	groups = {vessel = 1, dig_immediate = 3, attached_node = 1, food = 1},
+	sounds = default.node_sound_glass_defaults(),
 })
 
 minetest.register_craft({
@@ -51,6 +66,13 @@ minetest.register_craft({
 			}
 })
 
+minetest.register_craft({
+	type = "fuel",
+	recipe = "sunflower:sunflower_seeds_oil",
+	burntime = 20,
+	replacements = {{ "sunflower:sunflower_seeds_oil", "vessels:glass_bottle"}}
+})
+
 -- sunflower Seeds Roasted
 minetest.register_craftitem("sunflower:sunflower_seeds_roasted", {
 	description = "Roasted Sunflower Seeds",
@@ -59,6 +81,11 @@ minetest.register_craftitem("sunflower:sunflower_seeds_roasted", {
 	on_use = minetest.item_eat(2),
 })
 
+minetest.register_craft({
+	type = "fuel",
+	recipe = "sunflower:sunflower_seeds_roasted",
+	burntime = 2
+})
 -- sunflower Seeds Bread
 minetest.register_craftitem("sunflower:sunflower_seeds_bread", {
 	description = "Sunflower Seeds Bread",
@@ -80,3 +107,39 @@ minetest.register_craft({
 	output = "sunflower:sunflower_seeds_roasted",
 	recipe = "sunflower:sunflower_seeds"
 })
+
+--<<== Technic-Support >>==--
+
+if (minetest.get_modpath("technic")) then
+
+	-- Support Compressor
+	local compressor_recipes = {
+					{"sunflower:sunflower_seeds 6", "sunflower:sunflower_seeds_oil"},
+				}
+	for _, data in pairs(compressor_recipes) do
+
+		technic.register_compressor_recipe({input = {data[1]}, output = data[2]})
+
+	end
+
+	-- Support Centrifuge
+	local centrifuge_recipes = {
+					{ "flowers:sunflower",             "sunflower:sunflower_seeds 4",       "dye:yellow"      },
+				}
+				
+	for _, data in pairs(centrifuge_recipes) do
+	
+		technic.register_separating_recipe({ input = { data[1] }, output = { data[2], data[3], data[4] } })
+		
+	end
+
+	-- Support Extractor
+	local extractor_recipes = {
+		{"flowers:sunflower",                 "sunflower:sunflower_seeds 4"},
+	}
+
+	for _, data in ipairs(extractor_recipes) do
+		technic.register_extractor_recipe({input = {data[1]}, output = data[2]})
+	end
+	
+end
