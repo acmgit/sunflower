@@ -1,22 +1,22 @@
 --<<== Items >>==--
 
 -- sunflower Seeds
-minetest.register_craftitem("sunflower:sunflower_seeds", {
+minetest.register_craftitem("vegan_sunflower:seeds", {
     description = "Sunflower Seeds",
     groups = {seed = 1, food = 1},
-    inventory_image = "sunflower_seeds.png",
+    inventory_image = "vegan_sunflower_seeds.png",
     on_use = minetest.item_eat(1),
 })
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "sunflower:sunflower_seeds",
+	recipe = "vegan_sunflower:seeds",
 	burntime = 2
 })
 
 minetest.register_craft({
 	type = "shapeless",
-	output = "sunflower:sunflower_seeds 4",
+	output = "vegan_sunflower:seeds 4",
 	recipe = {"flowers:sunflower"},
 	replacements = {
 		{"flowers:sunflower", "dye:yellow"}
@@ -24,28 +24,28 @@ minetest.register_craft({
 })
 
 -- sunflower Seeds Dough
-minetest.register_craftitem("sunflower:sunflower_seeds_dough", {
+minetest.register_craftitem("vegan_sunflower:seeds_dough", {
     description = "Sunflower Seeds Dough",
     groups = {food = 1},
-    inventory_image = "sunflower_seeds_dough.png",
+    inventory_image = "vegan_sunflower_seeds_dough.png",
     on_use = minetest.item_eat(2),
 })
 
 minetest.register_craft({
-	output = "sunflower:sunflower_seeds_dough",
-	recipe = {	{"", "sunflower:sunflower_seeds", ""},
+	output = "vegan_sunflower:seeds_dough",
+	recipe = {	{"", "vegan_sunflower:seeds", ""},
 				{"farming:flour", "farming:flour", "farming:flour"}
 			}
 })
 
 -- sunflower Seeds Oil
 
-minetest.register_node("sunflower:sunflower_seeds_oil", {
+minetest.register_node("vegan_sunflower:seeds_oil", {
 	description = "Bottle of Sunflower Seeds Oil",
 	drawtype = "plantlike",
-	tiles = {"sunflower_seeds_oil.png"},
-	inventory_image = "sunflower_seeds_oil.png",
-	wield_image = "sunflower_seeds_oil.png",
+	tiles = {"vegan_sunflower_seeds_oil.png"},
+	inventory_image = "vegan_sunflower_seeds_oil.png",
+	wield_image = "vegan_sunflower_seeds_oil.png",
 	paramtype = "light",
 	is_ground_content = false,
 	walkable = false,
@@ -59,38 +59,38 @@ minetest.register_node("sunflower:sunflower_seeds_oil", {
 })
 
 minetest.register_craft({
-	output = "sunflower:sunflower_seeds_oil",
-	recipe = {	{"sunflower:sunflower_seeds", "sunflower:sunflower_seeds", "sunflower:sunflower_seeds"},
-				{"sunflower:sunflower_seeds", "sunflower:sunflower_seeds", "sunflower:sunflower_seeds"},
+	output = "vegan_sunflower:seeds_oil",
+	recipe = {	{"vegan_sunflower:seeds", "vegan_sunflower:seeds", "vegan_sunflower:seeds"},
+				{"vegan_sunflower:seeds", "vegan_sunflower:seeds", "vegan_sunflower:seeds"},
 				{"", "vessels:glass_bottle", ""}
 			}
 })
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "sunflower:sunflower_seeds_oil",
+	recipe = "vegan_sunflower:seeds_oil",
 	burntime = 20,
-	replacements = {{ "sunflower:sunflower_seeds_oil", "vessels:glass_bottle"}}
+	replacements = {{ "vegan_sunflower:seeds_oil", "vessels:glass_bottle"}}
 })
 
 -- sunflower Seeds Roasted
-minetest.register_craftitem("sunflower:sunflower_seeds_roasted", {
+minetest.register_craftitem("vegan_sunflower:seeds_roasted", {
 	description = "Roasted Sunflower Seeds",
 	groups = {food = 1},
-	inventory_image = "sunflower_seeds_roasted.png",
+	inventory_image = "vegan_sunflower_seeds_roasted.png",
 	on_use = minetest.item_eat(2),
 })
 
 minetest.register_craft({
 	type = "fuel",
-	recipe = "sunflower:sunflower_seeds_roasted",
+	recipe = "vegan_sunflower:seeds_roasted",
 	burntime = 2
 })
 -- sunflower Seeds Bread
-minetest.register_craftitem("sunflower:sunflower_seeds_bread", {
+minetest.register_craftitem("vegan_sunflower:seeds_bread", {
 	description = "Sunflower Seeds Bread",
 	groups = {food = 1},
-	inventory_image = "sunflower_seeds_bread.png",
+	inventory_image = "vegan_sunflower_seeds_bread.png",
 	on_use = minetest.item_eat(4),
 })
 
@@ -98,14 +98,14 @@ minetest.register_craftitem("sunflower:sunflower_seeds_bread", {
 minetest.register_craft({
 	type = "cooking",
 	cooktime = 15,
-	output = "sunflower:sunflower_seeds_bread",
-	recipe = "sunflower:sunflower_seeds_dough"
+	output = "vegan_sunflower:seeds_bread",
+	recipe = "vegan_sunflower:seeds_dough"
 })
 
 minetest.register_craft({
 	type = "cooking",
-	output = "sunflower:sunflower_seeds_roasted",
-	recipe = "sunflower:sunflower_seeds"
+	output = "vegan_sunflower:seeds_roasted",
+	recipe = "vegan_sunflower:seeds"
 })
 
 --<<== Technic-Support >>==--
@@ -114,7 +114,7 @@ if (minetest.get_modpath("technic")) then
 
 	-- Support Compressor
 	local compressor_recipes = {
-					{"sunflower:sunflower_seeds 6", "sunflower:sunflower_seeds_oil"},
+					{"vegan_sunflower:seeds 6", "vegan_sunflower:seeds_oil"},
 				}
 	for _, data in pairs(compressor_recipes) do
 
@@ -124,7 +124,7 @@ if (minetest.get_modpath("technic")) then
 
 	-- Support Centrifuge
 	local centrifuge_recipes = {
-					{ "flowers:sunflower",             "sunflower:sunflower_seeds 4",       "dye:yellow"      },
+					{ "flowers:sunflower",             "vegan_sunflower:seeds 4",       "dye:yellow"      },
 				}
 				
 	for _, data in pairs(centrifuge_recipes) do
@@ -135,7 +135,7 @@ if (minetest.get_modpath("technic")) then
 
 	-- Support Extractor
 	local extractor_recipes = {
-		{"flowers:sunflower",                 "sunflower:sunflower_seeds 4"},
+		{"flowers:sunflower",                 "vegan_sunflower:seeds 4"},
 	}
 
 	for _, data in ipairs(extractor_recipes) do

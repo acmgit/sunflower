@@ -1,6 +1,6 @@
 # vegan sunflower
 
-vegan Sunflower is a mod for Minetest.
+Vegan Sunflower is a mod for Minetest.
 
 ![Screenshot 1](textures/sunflower_screenshot.jpg)
 
