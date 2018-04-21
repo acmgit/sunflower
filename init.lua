@@ -54,7 +54,7 @@ minetest.register_node("vegan_sunflower:seeds_oil", {
 		type = "fixed",
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.3, 0.25}
 	},
-	groups = {vessel = 1, dig_immediate = 3, attached_node = 1, food = 1},
+	groups = {vessel = 1, dig_immediate = 3, attached_node = 1, food = 1, food_oil = 1},
 	sounds = default.node_sound_glass_defaults(),
 })
 
